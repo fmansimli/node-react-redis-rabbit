@@ -15,6 +15,7 @@ build/
 
 /dist
 dist/
+.vscode/
 
 # misc
 .env

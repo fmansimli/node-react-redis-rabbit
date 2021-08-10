@@ -2,6 +2,8 @@ import { Router } from "express";
 import User from "../models/user";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
+import sendEmail from "../mail/mailSender";
+import Mail from "../models/mail";
 
 const router = Router();
 
@@ -20,6 +22,16 @@ router.post("/login", async (req, res, next) => {
       { id: user._id, roles: user.roles },
       process.env.TOKEN_SECRET,
       { expiresIn: "1h" }
+    );
+    sendEmail(
+      new Mail(
+        user._id,
+        "faridmansimli@gmail.com",
+        user.username,
+        `${user.username} logged in..`,
+        "<a>lanet=>></a>",
+        "lanet olasi"
+      )
     );
     res.status(200).json({ user, token });
   } catch (error) {

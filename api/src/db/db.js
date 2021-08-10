@@ -1,6 +1,6 @@
 import { connect } from "mongoose";
 
-const dbConnect = async () => {
+async function dbConnect() {
   try {
     await connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
@@ -12,6 +12,6 @@ const dbConnect = async () => {
   } catch (error) {
     console.error(`$$$ mongodb connection failed!!=> ${error.message}`);
   }
-};
+}
 
 export default dbConnect;
