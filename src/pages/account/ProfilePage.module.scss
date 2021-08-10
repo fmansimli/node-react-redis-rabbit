@@ -1,0 +1,43 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 30px;
+}
+
+.loginChild {
+  width: 40%;
+  border: 1px solid red;
+  border-radius: 15px;
+  padding: 15px 25px;
+  box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.7);
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+  border: 1px green solid;
+  min-height: 650px;
+  padding: 5px;
+}
+
+@mixin direct {
+  display: flex;
+  border: 1px red solid;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin: 5px;
+  justify-content: center;
+}
+.left {
+  @include direct();
+  width: 50%;
+  align-items: stretch;
+  padding: 15px;
+}
+.right {
+  flex: 1;
+  @include direct();
+}

@@ -1,0 +1,27 @@
+$fontFam: "Courier New", Courier, monospace;
+$fontsize: 16px;
+.cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 5px;
+  border: 1px solid salmon;
+}
+
+.txt {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: $fontFam;
+  font-weight: bold;
+  font-size: $fontsize;
+}
+
+.btn {
+  border: 1px solid black;
+  background: none;
+  padding: 5px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: $fontsize;
+  font-family: $fontFam;
+}

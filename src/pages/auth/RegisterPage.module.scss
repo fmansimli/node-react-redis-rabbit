@@ -1,0 +1,25 @@
+.page {
+  display: flex;
+  flex-direction: row;
+  min-height: 600px;
+}
+
+@mixin loginMix {
+  padding: 5px;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  width: 40%;
+  @include loginMix;
+}
+
+.right {
+  display: flex;
+  width: 60%;
+  @include loginMix;
+  justify-content: center;
+  align-items: center;
+}

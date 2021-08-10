@@ -1,0 +1,49 @@
+$fontFam: "Courier New", Courier, monospace;
+$fontsize: 16px;
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  font-family: $fontFam;
+  font-size: 25px;
+}
+
+.formGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.txt {
+  padding: 10px 15px;
+  font-family: $fontFam;
+  font-size: $fontsize;
+  margin: 20px 0px;
+  border-radius: 4px;
+  border: 1px solid blue;
+}
+
+.btn {
+  padding: 10px 15px;
+  background: none;
+  font-family: $fontFam;
+  font-size: $fontsize;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #3f66f2;
+  cursor: pointer;
+}
+
+.smText {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.smError {
+  color: red;
+  font-weight: bold;
+}

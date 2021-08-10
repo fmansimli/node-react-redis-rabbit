@@ -1,0 +1,67 @@
+$navPad: 11px;
+$navColor: #323747;
+$hoverColor: #8d9fe3;
+$navPadHor: 20px;
+
+.nav {
+  display: flex;
+  background-color: $navColor;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  margin: 0;
+  background-color: $navColor;
+  flex-direction: row;
+  width: 100%;
+  font-family: monospace;
+  justify-content: space-around;
+}
+
+@mixin link {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 37px;
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 10px 25px;
+  }
+}
+.menuItem {
+  @include link();
+}
+.menuItemRight {
+  @include link();
+  justify-self: flex-end;
+}
+.menuItem:hover {
+  a {
+    color: white;
+  }
+  background-color: $hoverColor;
+}
+
+.menuItemRight:hover {
+  a {
+    color: blueviolet;
+  }
+  background-color: $hoverColor;
+}
+
+.mainLinks {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.authLinks {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
