@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel src  -d dist",
-    "build-babel": "babel -d dist ./src",
     "start": "npm run build && nodemon dist/server.js",
     "serve": "npm run build && node dist/server.js",
     "prod": "node dist/server.js",

@@ -16,7 +16,10 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "api": "cd api/ && npm run dev",
+    "api:dev": "cd api/ && npm run dev",
+    "api:pull": "cd api/ && npm install",
+    "api:prod": "cd api/ && npm run prod",
+    "api:serve": "cd api/ && npm run serve",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
