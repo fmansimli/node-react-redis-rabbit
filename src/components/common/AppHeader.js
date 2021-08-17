@@ -11,9 +11,16 @@ export default function AppHeader(props) {
         <div className={styles.mainLinks}>
           <div className={styles.menuItem}>
             <NavLink to="/" exact activeClassName="active">
-              Home
+              App
             </NavLink>
           </div>
+          {token && (
+            <div className={styles.menuItem}>
+              <NavLink to="/tasks" exact activeClassName="active">
+                Tasks
+              </NavLink>
+            </div>
+          )}
           <div className={styles.menuItem}>
             <NavLink to="/about" activeClassName="active">
               About

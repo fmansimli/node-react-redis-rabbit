@@ -1,0 +1,33 @@
+.page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 80vh;
+  padding: 10px 10px;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  display: flex;
+  padding: 5px;
+}
+
+.task {
+  margin: 0px 5px;
+  width: 50%;
+  padding: 10px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.right {
+  @extend .task;
+  border: 1px red solid;
+  padding: 7px;
+  height: 100vh;
+  overflow-y: auto;
+}

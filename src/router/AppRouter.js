@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Protected from "../components/security/Protected";
 
 import AppHeader from "../components/common/AppHeader";
 import HomePage from "../pages/HomePage";
-import ContactPage from "../pages/ContactPage";
 import AboutPage from "../pages/AboutPage";
+import ContactPage from "../pages/ContactPage";
 import ErrorPage from "../pages/ErrorPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import ProfilePage from "../pages/account/ProfilePage";
+import TaskPage from "../pages/TaskPage";
 
 export default function AppRouter(props) {
   return (
@@ -20,7 +22,8 @@ export default function AppRouter(props) {
           <Route path="/contact" component={ContactPage} />
           <Route path="/auth/login" component={LoginPage} />
           <Route path="/auth/register" component={RegisterPage} />
-          <Route path="/account/profile" component={ProfilePage} />
+          <Protected path="/account/profile" component={ProfilePage} />
+          <Protected path="/tasks" component={TaskPage} />
           <Route component={ErrorPage} />
         </Switch>
       </div>

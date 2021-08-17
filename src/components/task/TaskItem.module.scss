@@ -1,5 +1,31 @@
+$fontFam: "Courier New", Courier, monospace;
+
 .taskItem {
   border: 1px solid turquoise;
-  padding: 5px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 15px;
   margin-top: 10px;
+  font-family: $fontFam;
+  background-color: #f0fcf3;
+}
+
+.ico {
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.text {
+  color: darkmagenta;
+}
+.title {
+  color: crimson;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
 }

@@ -2,6 +2,9 @@ import express from "express";
 import http from "http";
 import "dotenv/config";
 import cors from "cors";
+import { join } from "path";
+
+import mailConsumer from "./rabbitMQ/consumers/mail";
 
 //import db connection
 import dbConnect from "./db/db";
@@ -15,17 +18,31 @@ import tasks from "./routes/tasks";
 // import middlewares
 import tokenVerify from "./middleware/tokenVerify";
 
+// import sockets
+import runTaskSocket from "./sockets/taskSocket";
+
 const app = express();
 const httpServer = http.Server(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(express.static(join(__dirname, "build")));
+
 app.use(
   cors({
     origin: "http://localhost:3000",
     optionsSuccessStatus: 200,
   })
 );
+
+app.get("/test", (req, res, next) => {
+  res.status(200).json({ url: req.originalUrl, msg: process.env.NODE_ENV });
+});
+
+app.get("/", (req, res, next) => {
+  res.sendFile(join(__dirname, "build", "index.html"));
+});
 
 app.use("/api/def", defaultRouter);
 app.use("/api/auth", auth);
@@ -34,8 +51,13 @@ app.use("/api", tokenVerify);
 app.use("/api/account", account);
 app.use("/api/tasks", tasks);
 
+// listening to mails queue
+mailConsumer();
+
 app.use(get404);
 app.use(handleError);
+
+runTaskSocket(httpServer);
 
 const port = process.env.PORT || 3007;
 httpServer.listen(port, async () => {

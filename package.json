@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -13,17 +16,22 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
+    "socket.io-client": "^4.1.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "api:dev": "cd api/ && npm run dev",
-    "api:pull": "cd api/ && npm install",
-    "api:prod": "cd api/ && npm run prod",
-    "api:serve": "cd api/ && npm run serve",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "serve -s build -l 3000",
+    "api": "cd api/ && npm run buildx && cd ../",
+    "move": "move build api/dist/",
+    "clean": "cd api/ && npm run clean && cd../",
+    "download": "npm install && cd api/ && npm install && cd ../",
+    "restart": "npm run clean && npm run build && npm run api",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "app:local": "npm run restart && npm run move && cd api/ && npm run start:pm2",
+    "app:local:full": "npm run download && npm run restart && npm run move && cd api/ && npm run start:pm2"
   },
   "eslintConfig": {
     "extends": [

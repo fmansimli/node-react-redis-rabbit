@@ -1,4 +1,5 @@
 import connectQueue from "../connect";
+import { createLog } from "../../services/errors";
 
 const channel = connectQueue("mails");
 const mailPublisher = async (mail) => {
@@ -6,7 +7,10 @@ const mailPublisher = async (mail) => {
     channel.sendToQueue("mails", Buffer.from(mail));
     console.log(`${mail._id} >> sended to (mails) queue..`);
   } catch (error) {
-    console.error(`publisher error==>>(${error.message})`);
+    await createLog({
+      title: error.name,
+      message: `publisher error==>>(${error.message})`,
+    });
   }
 };
 

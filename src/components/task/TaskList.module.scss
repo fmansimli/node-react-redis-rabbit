@@ -1,5 +1,13 @@
 .list {
-  border: 1px solid violet;
   padding: 6px;
   margin-bottom: 10px;
+}
+
+.msg {
+  background-color: cadetblue;
+  opacity: 0.5;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
 }

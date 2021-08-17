@@ -1,10 +1,14 @@
 import { createClient } from "redis";
+import { createLog } from "../services/errors";
 
 const connectRedis = () => {
-  const redisclient = createClient(); // default, localhost => port:6379
+  const redisclient = createClient({ host: process.env.REDIS_URL, port: 6379 });
 
-  redisclient.on_connect("error", (error) => {
-    console.error(`$$ redis connection error!!! =>> ${error.message}`);
+  redisclient.on("error", (error) => {
+    createLog({
+      title: "RedisConnectionError",
+      message: `$$ redis connection error!!! =>> ${error.message}`,
+    });
   });
 
   return redisclient;

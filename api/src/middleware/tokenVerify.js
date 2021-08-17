@@ -10,7 +10,7 @@ const tokenVerify = async (req, res, next) => {
     }
     throw new Error("no token provided...");
   } catch (error) {
-    return res.status(401).json({ message: error.message });
+    return res.status(401).json();
   }
 };
 

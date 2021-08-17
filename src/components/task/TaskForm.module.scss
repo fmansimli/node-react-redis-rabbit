@@ -1,27 +1,60 @@
 $fontFam: "Courier New", Courier, monospace;
 $fontsize: 16px;
+
+@mixin marginH {
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
 .cont {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 5px 5px;
-  border: 1px solid salmon;
+  flex-direction: column;
+  width: 100%;
+  font-family: $fontFam;
 }
 
 .txt {
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-family: $fontFam;
   font-weight: bold;
   font-size: $fontsize;
+  outline: none;
+  color: violet;
+  @include marginH();
+  padding: 15px;
+  border-color: blueviolet;
+}
+.txtInput {
+  border-radius: 4px;
+  font-family: $fontFam;
+  font-weight: bold;
+  font-size: $fontsize;
+  outline: none;
+  color: violet;
+  @include marginH();
+  padding: 8px;
+  text-align: center;
+}
+
+.dngTxt {
+  color: red;
 }
 
 .btn {
   border: 1px solid black;
   background: none;
-  padding: 5px 25px;
+  padding: 8px;
   border-radius: 5px;
   font-weight: bold;
   font-size: $fontsize;
   font-family: $fontFam;
+  cursor: pointer;
+  @include marginH();
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }

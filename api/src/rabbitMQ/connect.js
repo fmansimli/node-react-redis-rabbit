@@ -1,4 +1,5 @@
 import { connect } from "amqplib";
+//import { createLog } from "../services/errors";
 
 const connectRabbit = async (queueName) => {
   try {

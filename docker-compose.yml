@@ -1,0 +1,38 @@
+version: "3.4"
+services:
+  node-server:
+    build: .
+    container_name: node-cont
+    restart: always
+    ports:
+      - 5377:3007
+    depends_on:
+      - mongo-server
+      - redis-server
+      - rabbit-server
+    environment:
+      CONTAINER_SERVICE: Docker
+      NODE_ENV: production
+
+  mongo-server:
+    image: mongo
+    ports:
+      - 27018:27017
+    volumes:
+      - mongodata:/data/db
+    container_name: mongo-cont
+    restart: always
+  redis-server:
+    image: redis
+    ports:
+      - 6379:6379
+    container_name: redis-cont
+    restart: always
+  rabbit-server:
+    image: rabbitmq
+    ports:
+      - 5672:5672
+    container_name: rabbit-cont
+    restart: always
+volumes:
+  mongodata:

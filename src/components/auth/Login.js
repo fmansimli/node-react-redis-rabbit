@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 import { useDispatch } from "react-redux";
@@ -50,7 +50,7 @@ const Login = (props) => {
 
         dispatch(loginA(data));
         props.setToken(data.token);
-        history.push("/account/profile");
+        history.push(props.redirect);
       } catch (error) {
         setErrors({ ...errors, errMessage: error.message });
       }
@@ -59,7 +59,7 @@ const Login = (props) => {
 
   return (
     <div className={styles.cont}>
-      <h4>{props.title}</h4>
+      <h4 style={{ color: props.titleColor }}>{props.title}</h4>
       <form>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
@@ -94,6 +94,8 @@ const Login = (props) => {
 
 Login.defaultProps = {
   title: "Login..",
+  redirect: "/",
+  titleColor: "black",
 };
 
 export default Login;

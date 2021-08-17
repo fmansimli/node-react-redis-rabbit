@@ -17,7 +17,6 @@ async function sendEmail(mail, data = null) {
       to: mail.to,
       subject: `${mail.subject} ✔`,
       text: mail.text,
-      //html: "<b>Hello world?</b>",
     });
 
     //console.log("Message sent: %s", info.messageId);

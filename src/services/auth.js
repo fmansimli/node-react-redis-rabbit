@@ -1,7 +1,7 @@
-const apiHost = "http://localhost:3007";
+const host = process.env.REACT_APP_API_HOST;
 
 export const loginAsync = (email, password) => {
-  return fetch(apiHost + "/api/auth/login", {
+  return fetch(host + "/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,10 +11,8 @@ export const loginAsync = (email, password) => {
   });
 };
 
-export const testAsync = (email, password) => {};
-
 export function registerAsync(username, email, password) {
-  return fetch(apiHost + "/api/auth/register", {
+  return fetch(host + "/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +25,7 @@ export function registerAsync(username, email, password) {
 export function refreshAuth() {
   const token = localStorage.getItem("token");
   if (token) {
-    return fetch(apiHost + "/api/account/refresh", {
+    return fetch(host + "/api/account/refresh", {
       method: "GET",
       headers: {
         auth: token,
