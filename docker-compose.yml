@@ -17,7 +17,7 @@ services:
   mongo-server:
     image: mongo
     ports:
-      - 27018:27017
+      - 27017:27017
     volumes:
       - mongodata:/data/db
     container_name: mongo-cont
@@ -32,7 +32,18 @@ services:
     image: rabbitmq
     ports:
       - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitdata:/var/lib/rabbitmq/
+      - rabbitlog:/var/log/rabbitmq
     container_name: rabbit-cont
     restart: always
+    networks:
+      - bridge
 volumes:
   mongodata:
+  rabbitdata:
+  rabbitlog:
+networks:
+  bridge:
+    driver: bridge

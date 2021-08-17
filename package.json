@@ -24,14 +24,17 @@
     "build": "react-scripts build",
     "serve": "serve -s build -l 3000",
     "api": "cd api/ && npm run buildx && cd ../",
-    "move": "move build api/dist/",
+    "move:win": "move build api/dist/",
+    "move:linux": "mv build api/dist/",
     "clean": "cd api/ && npm run clean && cd../",
     "download": "npm install && cd api/ && npm install && cd ../",
     "restart": "npm run clean && npm run build && npm run api",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "app:local": "npm run restart && npm run move && cd api/ && npm run start:pm2",
-    "app:local:full": "npm run download && npm run restart && npm run move && cd api/ && npm run start:pm2"
+    "docker": "npm run build && npm run api && npm run move:linux",
+    "up": "cd api/ && npm run start:pm2",
+    "app:local": "npm run restart && npm run move:win && cd api/ && npm run start:pm2",
+    "app:local:full": "npm run download && npm run restart && npm run move:win && cd api/ && npm run start:pm2"
   },
   "eslintConfig": {
     "extends": [
