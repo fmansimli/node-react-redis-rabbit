@@ -26,9 +26,53 @@ export default function ProfilePage() {
   return (
     <div className={styles.page}>
       <div className={styles.left}>
-        <p>{user.username}</p>
+        <div className={styles.leftOne}>
+          <div className={styles.img}>
+            <img
+              className={styles.profilImg}
+              src="https://picsum.photos/200"
+              alt="asdfg dd"
+            />
+          </div>
+          <div>@{user.username}</div>
+          <div>{user.email}</div>
+          <div>{user.createAt}</div>
+          <div>@{user.username}</div>
+          <div>{user.email}</div>
+          <div>{user.createAt}</div>
+          <div>@{user.username}</div>
+          <div>{user.email}</div>
+          <div>{user.createAt}</div>
+        </div>
+        <div className={styles.leftTwo}>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+          <div>Lorem ipsum dolor sit amet consectetur.</div>
+        </div>
       </div>
-      <div className={styles.right}>right section...</div>
+      <div className={styles.right}>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,9 @@ export default function RegisterPage() {
       <div className={styles.left}>
         <Register />
       </div>
-      <div className={styles.right}>Photo</div>
+      <div className={styles.right}>
+        <div>{"/* Life runs on Code */"}</div>
+      </div>
     </div>
   );
 }

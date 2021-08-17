@@ -3,7 +3,7 @@ import { join } from "path";
 
 export function get404(req, res, next) {
   //res.status(404).json({ message: "Not Found..." });
-  res.sendFile(join(__dirname, "../", "build", "index.html"));
+  res.status(200).sendFile(join(__dirname, "../", "build", "index.html"));
 }
 
 export async function handleError(err, req, res, next) {

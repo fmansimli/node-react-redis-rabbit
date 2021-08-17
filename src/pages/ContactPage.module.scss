@@ -1,0 +1,12 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-family: "Courier New", Courier, monospace;
+}
+.desc {
+  border: 1px green solid;
+  padding: 20px 60px;
+}

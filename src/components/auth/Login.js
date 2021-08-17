@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 import { useDispatch } from "react-redux";
@@ -82,9 +82,12 @@ const Login = (props) => {
           />
           <small className={styles.smText}>{errors.password}</small>
         </div>
-        <button className={styles.btn} onClick={submitHandler}>
-          Login
-        </button>
+        <div className={styles.actions}>
+          <button className={styles.btn} onClick={submitHandler}>
+            Login
+          </button>
+          <Link to="/auth/register">do not have an account ?</Link>
+        </div>
         <br />
         <small className={styles.smError}>{errors.errMessage}</small>
       </form>

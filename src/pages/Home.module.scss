@@ -1,7 +1,79 @@
 .page {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+  min-height: 80vh;
+  div {
+    padding: 5px;
+    text-align: center;
+    display: flex;
+  }
+}
+
+.left {
+  width: 20%;
+  border: none;
+  flex-direction: column;
+  justify-content: space-around;
+  div {
+    flex: auto;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid green;
+    margin: 5px;
+    box-shadow: 2px 3px 3px 1px;
+    background-color: #61edfa;
+    opacity: 0.5;
+    font-size: 40px;
+    cursor: pointer;
+  }
+}
+
+.right {
+  flex: 1;
+  flex-direction: column;
+}
+
+.rightOne {
+  border: none;
+  height: 25%;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  div {
+    flex: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px solid green;
+    margin: 5px;
+    box-shadow: 2px 3px 3px 1px;
+    background: #fa325d;
+    opacity: 0.6;
+    font-size: 30px;
+    cursor: pointer;
+  }
+}
+
+.rightTwo {
+  height: 75%;
+  border: none;
+  flex-direction: column;
+  overflow: hidden;
+  div {
+    width: 100%;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid green;
+    margin-top: 10px;
+    background-color: #e4f7e6;
+    opacity: 0.8;
+    font-size: 20px;
+  }
 }

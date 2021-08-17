@@ -12,7 +12,9 @@ export default function LoginPage(props) {
       <div className={styles.left}>
         <Login setToken={setToken} />
       </div>
-      <div className={styles.right}>Photo</div>
+      <div className={styles.right}>
+        <div>{"/* Life runs on Code */"}</div>
+      </div>
     </div>
   );
 }

@@ -10,7 +10,6 @@ import mailConsumer from "./rabbitMQ/consumers/mail";
 import dbConnect from "./db/db";
 //import error controller and routes
 import { get404, handleError } from "./controllers/errors";
-import defaultRouter from "./routes/default";
 import auth from "./routes/auth";
 import account from "./routes/account";
 import tasks from "./routes/tasks";
@@ -36,15 +35,10 @@ app.use(
   })
 );
 
-app.get("/test", (req, res, next) => {
-  res.status(200).json({ url: req.originalUrl, msg: process.env.NODE_ENV });
-});
-
 app.get("/", (req, res, next) => {
-  res.sendFile(join(__dirname, "build", "index.html"));
+  res.status(200).sendFile(join(__dirname, "build", "index.html"));
 });
 
-app.use("/api/def", defaultRouter);
 app.use("/api/auth", auth);
 
 app.use("/api", tokenVerify);

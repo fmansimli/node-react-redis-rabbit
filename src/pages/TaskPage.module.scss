@@ -20,7 +20,7 @@
   margin: 0px 5px;
   width: 50%;
   padding: 10px;
-  height: 100vh;
+  min-height: 84vh;
   overflow-y: auto;
 }
 
@@ -28,6 +28,6 @@
   @extend .task;
   border: 1px red solid;
   padding: 7px;
-  height: 100vh;
   overflow-y: auto;
+  box-shadow: 2px 4px 5px 2px;
 }

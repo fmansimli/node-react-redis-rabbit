@@ -17,27 +17,67 @@
 .page {
   display: flex;
   flex-direction: row;
-  border: 1px green solid;
-  min-height: 650px;
+  min-height: 80vh;
   padding: 5px;
+  box-sizing: border-box;
 }
 
 @mixin direct {
   display: flex;
-  border: 1px red solid;
   justify-content: center;
   align-items: center;
-  padding: 5px;
   margin: 5px;
-  justify-content: center;
 }
 .left {
   @include direct();
   width: 50%;
   align-items: stretch;
-  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  div {
+    padding: 5px;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 }
+
+.leftOne {
+  width: 30%;
+  flex-direction: column;
+  div {
+    border: 1px solid green;
+  }
+}
+.leftTwo {
+  flex: 1;
+  div {
+    border: 1px solid violet;
+  }
+}
+
+.img {
+  width: 100%;
+}
+
+.profilImg {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .right {
   flex: 1;
   @include direct();
+  flex-direction: column;
+  justify-content: flex-start;
+
+  div {
+    border: 2px solid brown;
+    margin-bottom: 5px;
+    padding: 6px;
+    width: 100%;
+    text-align: center;
+  }
 }
