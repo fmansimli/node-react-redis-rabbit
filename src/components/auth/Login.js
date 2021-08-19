@@ -1,66 +1,47 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import styles from "./Login.module.scss";
-
 import { useDispatch } from "react-redux";
 import { loginAsync } from "../../services/auth";
 import { loginA } from "../../store/actions/auth";
+import { useFormik } from "formik";
+import { loginSchema } from "../validation";
 
 const Login = (props) => {
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    errMessage: "",
-  });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [errMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const validate = () => {
-    let validation = true;
-    if (email === "") {
-      setErrors({ ...errors, email: "email is required!!!" });
-      validation = false;
-    }
-    if (password === "") {
-      setErrors({ ...errors, password: "password is required..!!" });
-      validation = false;
-    }
-    if (validation) {
-      setErrors({ email: "", password: "", errMessage: "" });
-    }
-    return validation;
-  };
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const result = validate();
-    if (result) {
-      try {
-        const resp = await loginAsync(email, password);
-        if (resp.status === 400) {
-          throw new Error("username or password incorrect !!!");
-        }
-        if (resp.status === 500) {
-          throw new Error("oops! an error ocurred!!!");
-        }
-        const data = await resp.json();
-
-        dispatch(loginA(data));
-        props.setToken(data.token);
-        history.push(props.redirect);
-      } catch (error) {
-        setErrors({ ...errors, errMessage: error.message });
+  const submitHandler = async (values) => {
+    try {
+      const resp = await loginAsync(values.email, values.password);
+      if (resp.status === 400) {
+        throw new Error("username or password incorrect !!!");
       }
+      if (resp.status === 500) {
+        throw new Error("oops! an error ocurred!!!");
+      }
+      const data = await resp.json();
+
+      dispatch(loginA(data));
+      props.setToken(data.token);
+      history.push(props.redirect);
+    } catch (error) {
+      setErrMessage(error.message);
     }
   };
+
+  const { handleBlur, handleChange, handleSubmit, values, errors, touched } =
+    useFormik({
+      initialValues: { email: "", password: "" },
+      onSubmit: submitHandler,
+      validationSchema: loginSchema,
+    });
 
   return (
     <div className={styles.cont}>
       <h4 style={{ color: props.titleColor }}>{props.title}</h4>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
           <input
@@ -68,9 +49,13 @@ const Login = (props) => {
             type="text"
             name="email"
             autoComplete="off"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
+            value={values.email}
+            onBlur={handleBlur}
           />
-          <small className={styles.smText}>{errors.email}</small>
+          <small className={styles.smText}>
+            {touched.email ? errors.email : ""}
+          </small>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email">Password:</label>
@@ -78,18 +63,22 @@ const Login = (props) => {
             className={styles.txt}
             type="password"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
           />
-          <small className={styles.smText}>{errors.password}</small>
+          <small className={styles.smText}>
+            {touched.password ? errors.password : ""}
+          </small>
         </div>
         <div className={styles.actions}>
-          <button className={styles.btn} onClick={submitHandler}>
+          <button className={styles.btn} type="submit">
             Login
           </button>
           <Link to="/auth/register">do not have an account ?</Link>
         </div>
         <br />
-        <small className={styles.smError}>{errors.errMessage}</small>
+        <small className={styles.smError}>{errMessage}</small>
       </form>
     </div>
   );

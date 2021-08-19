@@ -4,7 +4,7 @@ import "dotenv/config";
 import cors from "cors";
 import { join } from "path";
 
-import mailConsumer from "./rabbitMQ/consumers/mail";
+import mailSubscriber from "./redis/subscribers/mailSubscriber";
 
 //import db connection
 import dbConnect from "./db/db";
@@ -46,7 +46,7 @@ app.use("/api/account", account);
 app.use("/api/tasks", tasks);
 
 // listening to mails queue
-mailConsumer();
+mailSubscriber();
 
 app.use(get404);
 app.use(handleError);

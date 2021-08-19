@@ -8,8 +8,10 @@
     "buildx": "babel src -d dist",
     "start": "node dist/server.js",
     "start:pm2": "pm2 start dist/server.js",
-    "clean": "rimraf dist && cd ../ && rimraf build && cd api/",
-    "clean:full": "rimraf dist && cd ../ && rimraf build && rimraf node_modules && cd api/ && rimraf node_modules",
+    "clean:win": "rimraf dist && cd ../ && rimraf build && cd api/",
+    "clean:linux": "rm -rf dist && cd ../ && rm -rf build && cd api/",
+    "clean:full:win": "rimraf dist && cd ../ && rimraf build && rimraf node_modules && cd api/ && rimraf node_modules",
+    "clean:full:linux": "rm -rf dist && cd ../ && rm -rf build && rm -rf node_modules && cd api/ && rm -rf node_modules",
     "move:win": "move ../build dist/",
     "move:linux": "mv ../build dist/",
     "test": "npm run build && mocha --require @babel/register"

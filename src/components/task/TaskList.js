@@ -40,7 +40,7 @@ export default function TaskList(props) {
         />
       ))}
       {props.tasks.length === 0 ? (
-        <div className={styles.msg}>No Tasks...</div>
+        <div className={styles.msg}>{props.noMessage}</div>
       ) : (
         ""
       )}

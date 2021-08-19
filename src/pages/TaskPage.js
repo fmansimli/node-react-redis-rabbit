@@ -39,6 +39,7 @@ export default function TaskPage() {
   const errors = useSelector((state) =>
     state.errors.filter((error) => error.label === "tasks")
   );
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     initTask();
@@ -57,17 +58,20 @@ export default function TaskPage() {
 
     (async () => {
       try {
-        const tasks = await (await getAllTasks()).json();
+        const tasks = await (
+          await getAllTasks(localStorage.getItem("token"))
+        ).json();
         dispatch(setTasks(tasks));
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         dispatch(addError({ ...error, _id: Date.now, label: "tasks" }));
       }
     })();
   }, []);
 
   const sendTask = async (task) => {
-    newTask(task);
+    newTask({ task: { ...task, userId: user._id }, username: user.username });
   };
 
   return loading ? (
@@ -82,10 +86,13 @@ export default function TaskPage() {
           </div>
           <div className={styles.child} style={{ flex: 1 }}>
             <div className={styles.task}>
-              <TaskList tasks={tasks} />
+              <TaskList tasks={tasks} noMessage="there is no tasks.." />
             </div>
             <div className={styles.right}>
-              <TaskList tasks={doneTasks} />
+              <TaskList
+                tasks={doneTasks}
+                noMessage="there is no completed task.."
+              />
             </div>
           </div>
         </div>

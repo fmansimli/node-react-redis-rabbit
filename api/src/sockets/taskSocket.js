@@ -1,6 +1,8 @@
 import socketio from "socket.io";
 import { createTask, deleteTask, doneTask } from "../services/tasks";
 
+import publishMail from "../redis/publishers/mailPublisher";
+
 const runTaskSocket = (httpServer) => {
   const io = socketio(httpServer, {
     cors: {
@@ -13,9 +15,16 @@ const runTaskSocket = (httpServer) => {
   nsp.on("connection", (socket) => {
     //console.log(`++ a user connected =>> (${socket.id})`);
 
-    socket.on("new-task", async (task) => {
+    socket.on("new-task", async (data) => {
       try {
-        const ctask = await createTask(task);
+        const ctask = await createTask(data.task);
+
+        publishMail({
+          subject: "new task!!",
+          display: "@" + data.username,
+          text: `${data.task.title}\n${data.task.text}`,
+        });
+
         nsp.emit("new-task1", ctask);
       } catch (error) {
         nsp.emit("new-task-e", error);

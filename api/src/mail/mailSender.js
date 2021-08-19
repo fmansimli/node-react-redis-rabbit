@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { createLog } from "../services/errors";
 
 async function sendEmail(mail, data = null) {
   try {
@@ -21,7 +22,10 @@ async function sendEmail(mail, data = null) {
 
     //console.log("Message sent: %s", info.messageId);
   } catch (error) {
-    console.error(`mail error=>> ${error.message}`);
+    createLog({
+      title: error.name,
+      message: `mail error=>> ${error.message}`,
+    });
   }
 }
 

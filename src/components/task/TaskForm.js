@@ -1,63 +1,64 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./TaskForm.module.scss";
+import { useFormik } from "formik";
+import { newTaskSchema } from "../validation";
 
 const TaskForm = ({ sendTask, action, errMessage }) => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [titleErr, setTitleErr] = useState("");
-  const [textErr, setTextErr] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-      sendTask({ title, text });
-      setText("");
-      setTitle("");
-    }
+  const handleCustomSubmit = (values) => {
+    sendTask({ title: values.title, text: values.text });
+    resetForm();
   };
 
-  const validate = () => {
-    setTitleErr("");
-    setTextErr("");
-    let val = true;
-    if (!title || title.length < 3) {
-      setTitleErr("title length should be minimum 3..");
-      val = false;
-    }
-    if (!text || text.length < 3) {
-      setTextErr("content length should be minimum 3 ..");
-      val = false;
-    }
-
-    return val;
-  };
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    touched,
+    values,
+    errors,
+    resetForm,
+    isSubmitting,
+  } = useFormik({
+    initialValues: { title: "", text: "" },
+    onSubmit: handleCustomSubmit,
+    validationSchema: newTaskSchema,
+  });
 
   return (
     <div className={styles.cont}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
           <input
             className={styles.txtInput}
             name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={values.title}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
-          <small className={styles.dngTxt}>{titleErr}</small>
+          <small className={styles.dngTxt}>
+            {touched.title ? errors.title : ""}
+          </small>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="text">Content:</label>
           <textarea
             className={styles.txt}
             rows={10}
-            onChange={(e) => setText(e.target.value)}
-            value={text}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.text}
+            name="text"
           ></textarea>
-          <small className={styles.dngTxt}>{textErr}</small>
+          <small className={styles.dngTxt}>
+            {touched.text ? errors.text : ""}
+          </small>
         </div>
 
-        <button className={styles.btn}>{action}</button>
+        <button className={styles.btn} type="submit">
+          {isSubmitting ? "sending.." : action}
+        </button>
         <br />
         <small className={styles.dngTxt}>{errMessage}</small>
       </form>

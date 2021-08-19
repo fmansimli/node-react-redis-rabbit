@@ -13,13 +13,12 @@ export const createTask = (task) => {
   });
 };
 
-export const getAllTasks = () => {
+export const getAllTasks = (tokenn) => {
   return fetch(`${host}/api/tasks`, {
     method: "GET",
     mode: "cors",
     headers: {
-      auth: token,
-      "Content-Type": "application/json",
+      auth: tokenn,
     },
   });
 };

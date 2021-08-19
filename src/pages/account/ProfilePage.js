@@ -1,27 +1,14 @@
 import React from "react";
 import styles from "./ProfilePage.module.scss";
-import useToken from "../../hooks/useToken";
 import { useSelector } from "react-redux";
 
-import Login from "../../components/auth/Login";
-
 export default function ProfilePage() {
-  const { token, setToken } = useToken();
   const user = useSelector((state) => state.auth.user);
-
-  if (!token) {
-    return (
-      <div className={styles.login}>
-        <div className={styles.loginChild}>
-          <Login
-            title="Please login to visit (Profile page)"
-            setToken={setToken}
-          />
-        </div>
-        <br />
-      </div>
-    );
-  }
+  const fDate = new Date(user.createAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className={styles.page}>
@@ -36,13 +23,13 @@ export default function ProfilePage() {
           </div>
           <div>@{user.username}</div>
           <div>{user.email}</div>
-          <div>{user.createAt}</div>
+          <div>{fDate}</div>
           <div>@{user.username}</div>
           <div>{user.email}</div>
-          <div>{user.createAt}</div>
+          <div>{fDate}</div>
           <div>@{user.username}</div>
           <div>{user.email}</div>
-          <div>{user.createAt}</div>
+          <div>{fDate}</div>
         </div>
         <div className={styles.leftTwo}>
           <div>Lorem ipsum dolor sit amet consectetur.</div>

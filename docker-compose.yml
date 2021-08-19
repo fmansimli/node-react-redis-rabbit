@@ -9,7 +9,7 @@ services:
     depends_on:
       - mongo-server
       - redis-server
-      - rabbit-server
+      #- rabbit-server
     environment:
       CONTAINER_SERVICE: Docker
       NODE_ENV: production
@@ -17,7 +17,7 @@ services:
   mongo-server:
     image: mongo
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
       - mongodata:/data/db
     container_name: mongo-cont
@@ -28,22 +28,23 @@ services:
       - 6379:6379
     container_name: redis-cont
     restart: always
-  rabbit-server:
-    image: rabbitmq
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - rabbitdata:/var/lib/rabbitmq/
-      - rabbitlog:/var/log/rabbitmq
-    container_name: rabbit-cont
-    restart: always
-    networks:
-      - bridge
+# rabbit-server:
+#   image: rabbitmq
+#   ports:
+#     - 5672:5672
+#     - 15672:15672
+#   volumes:
+#     - rabbitdata:/var/lib/rabbitmq/
+#     - rabbitlog:/var/log/rabbitmq
+#   container_name: rabbit-cont
+#   restart: always
+#   networks:
+#     - bridge
 volumes:
   mongodata:
-  rabbitdata:
-  rabbitlog:
-networks:
-  bridge:
-    driver: bridge
+# rabbitdata:
+# rabbitlog:
+
+#networks:
+# bridge:
+#  driver: bridge

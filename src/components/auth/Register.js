@@ -2,57 +2,46 @@ import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import { registerAsync } from "../../services/auth";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import { registerSchema } from "../validation";
 
 const Register = (props) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({
-    email: "",
-    username: "",
-    password: "",
-    errMessage: "",
-  });
-
+  const [errMessage, setErrMessage] = useState();
   const history = useHistory();
 
-  const validate = () => {
-    let validation = true;
-    if (email === "") {
-      setErrors({ ...errors, email: "email is required!!!" });
-      validation = false;
+  const submitHandler = async (values) => {
+    try {
+      const resp = await registerAsync(
+        values.username,
+        values.email,
+        values.password
+      );
+      if (resp.status === 204) {
+        return history.push("/auth/login");
+      }
+      throw new Error("an error ocurred..");
+    } catch (error) {
+      setErrMessage(error.message);
     }
-    if (password === "") {
-      setErrors({ ...errors, password: "password is required..!!" });
-      validation = false;
-    }
-    if (username === "") {
-      setErrors({ ...errors, username: "username is required..!!" });
-      validation = false;
-    }
-    if (validation) {
-      setErrors({ email: "", password: "", username: "", errMessage: "" });
-    }
-    return validation;
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const result = validate();
-    if (result) {
-      try {
-        await (await registerAsync(username, email, password)).json();
-        history.push("/auth/login");
-      } catch (error) {
-        setErrors({ ...errors, errMessage: "an error ocurred.." });
-      }
-    }
-  };
+  const { handleBlur, handleChange, handleSubmit, values, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: "",
+        username: "",
+        password: "",
+        passwordConfirm: "",
+      },
+      onSubmit: submitHandler,
+      validationSchema: registerSchema,
+    });
+
   return (
     <div className={styles.cont}>
       <h4>{props.title}</h4>
       <hr />
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="username">Username:</label>
           <input
@@ -60,9 +49,13 @@ const Register = (props) => {
             type="text"
             name="username"
             autoComplete="off"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.username}
           />
-          <small className={styles.smText}>{errors.username}</small>
+          <small className={styles.smText}>
+            {touched.username ? errors.username : ""}
+          </small>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
@@ -71,9 +64,13 @@ const Register = (props) => {
             type="text"
             name="email"
             autoComplete="off"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.email}
           />
-          <small className={styles.smText}>{errors.email}</small>
+          <small className={styles.smText}>
+            {touched.email ? errors.email : ""}
+          </small>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">Password:</label>
@@ -82,15 +79,34 @@ const Register = (props) => {
             type="password"
             name="password"
             autoComplete="off"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
           />
-          <small className={styles.smText}>{errors.password}</small>
+          <small className={styles.smText}>
+            {touched.password ? errors.password : ""}
+          </small>
         </div>
-        <button className={styles.btn} onClick={submitHandler}>
+        <div className={styles.formGroup}>
+          <label htmlFor="passwordConfirm">Confirm Password:</label>
+          <input
+            className={styles.txt}
+            type="password"
+            name="passwordConfirm"
+            autoComplete="off"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.passwordConfirm}
+          />
+          <small className={styles.smText}>
+            {touched.passwordConfirm ? errors.passwordConfirm : ""}
+          </small>
+        </div>
+        <button className={styles.btn} type="submit">
           Register
         </button>
         <br />
-        <small className={styles.smError}>{errors.errMessage}</small>
+        <small className={styles.smError}>{errMessage}</small>
       </form>
     </div>
   );
