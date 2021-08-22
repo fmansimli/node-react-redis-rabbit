@@ -36,3 +36,11 @@ export async function decryptMessage(privateKey, chiperText) {
   const plain = new TextDecoder().decode(decryption);
   return plain;
 }
+
+export function base64ToString(text) {
+  return atob(text);
+}
+
+export function stringToBase64(text) {
+  return btoa(text);
+}
